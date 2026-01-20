@@ -11,7 +11,8 @@ public class PriorityQueueTests
     // The Dequeue function shall remove the function in the front of the queue.
     // Expected Result: The 3 priority items added to the list will be taken out in the same order they were added.
     // Defect(s) Found: The Dequeue() function was missing a line of code that removed the item from the list. If an item had 
-    // the same priority as another the last added would be removed first instead of the first that was added.
+    // the same priority as another the last added would be removed first instead of the first that was added. 
+    // Once this was fixed the items were taken out in the same order they were added.
     public void TestPriorityQueue_1()
     {
         var priorityQueue = new PriorityQueue();
@@ -37,6 +38,7 @@ public class PriorityQueueTests
     // If there are more than one item with the highest priority, then the item closest to the front of the queue will be removed and its value returned.
     // Expected Result: the queue will dequeue the items in the order of crackers, cheese, ham and then butter. Ham was enqueued first so it will be pulled out before butter.
     // Defect(s) Found: The Dequeue() function wouldn't check the last item added in the queue since it was only looking through queue.Count -1, which would exclude the last item added.
+    //Once that was corrected the test ran as expected.
     public void TestPriorityQueue_2()
     {
         var priorityQueue = new PriorityQueue();
@@ -68,7 +70,7 @@ public class PriorityQueueTests
     [TestMethod]
     // Scenario: If the queue is empty, then an error exception shall be thrown. This exception should be an InvalidOperationException with a message of "The queue is empty."
     // Expected Result: An error will be thrown when attempting to dequeue an empty queue. The text of the error will include the message "The queue is empty."
-    // Defect(s) Found:
+    // Defect(s) Found: No defects found, the InvalidOperationException was thrown with the message "The queue is empty."
     public void TestPriorityQueue_3()
     {
         var priorityQueue = new PriorityQueue();
