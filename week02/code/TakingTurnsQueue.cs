@@ -45,6 +45,11 @@ public class TakingTurnsQueue
                 person.Turns -= 1;
                 _people.Enqueue(person);
             }
+            //test needs check if the number is equal to or less than 0 to have an infinite number of turns
+            else if (person.Turns <= 0)
+            {
+                _people.Enqueue(person);
+            }
 
             return person;
         }

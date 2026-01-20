@@ -24,14 +24,19 @@
 
         // Find the index of the item with the highest priority to remove
         var highPriorityIndex = 0;
-        for (int index = 1; index < _queue.Count - 1; index++)
+
+        //removed the -1 after _queue.Count since it wouldnt read the last item in the queue
+        for (int index = 1; index < _queue.Count; index++)
         {
-            if (_queue[index].Priority >= _queue[highPriorityIndex].Priority)
+            // it shouldnt be >= otherwise it will overwrite the priority of the same item that came first
+            if (_queue[index].Priority > _queue[highPriorityIndex].Priority)
                 highPriorityIndex = index;
         }
 
         // Remove and return the item with the highest priority
         var value = _queue[highPriorityIndex].Value;
+        //was missing the code to remove the item from the queue
+        _queue.RemoveAt(highPriorityIndex);
         return value;
     }
 
