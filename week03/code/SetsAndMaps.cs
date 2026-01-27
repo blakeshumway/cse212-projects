@@ -22,7 +22,31 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+
+        HashSet<string> seen = new HashSet<string>();
+
+        List<string> pairs = new List<string>();
+
+        foreach (string letter in words)
+        {
+            if (letter[0] == letter[1])
+            {
+                continue;
+            }
+
+            string backwards = $"{letter[1]}{letter[0]}";
+
+            if (seen.Contains(backwards))
+            {
+                pairs.Add($"{letter} & {backwards}");
+            }
+
+            seen.Add(letter);
+
+        }
+
+        string[] result = pairs.ToArray();
+        return result;
     }
 
     /// <summary>
@@ -43,6 +67,17 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
+            string education = fields[3];
+
+            if (degrees.ContainsKey(education))
+            {
+                degrees[education] += 1;
+            }
+            else
+            {
+                degrees.Add(education, 1);
+            }
+
         }
 
         return degrees;
@@ -67,7 +102,44 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+
+        if (word1.Replace(" ", "").Length != word2.Replace(" ", "").Length)
+        {
+            return false;
+        }
+
+        Dictionary<char, int>dic = new();
+        foreach (char letter in word1.Replace(" ", ""))
+        {
+            //char lowerCase = letter
+            if (dic.ContainsKey(char.ToLower(letter)))
+            {
+                dic[char.ToLower(letter)]++;
+            }
+            else
+            {
+                dic[char.ToLower(letter)] = 1;
+            }
+        }
+
+        foreach (char letter in word2.Replace(" ", ""))
+        {
+            if (!dic.ContainsKey(char.ToLower(letter)))
+            {
+                return false;
+            }
+           
+            if (dic[char.ToLower(letter)] == 0)
+            {
+                return false;
+            }
+            else
+            {
+                dic[char.ToLower(letter)] -= 1;
+            }
+        }
+
+        return true;
     }
 
     /// <summary>
